@@ -65,7 +65,7 @@ export default {
       })
     },
     onEdit(row){
-
+this.$router.push(`/playlist/edit/${row._id}`)
     },
   }
 }
