@@ -45,6 +45,9 @@ export default {
         }
         this.$router.push('/playlist/list')
       })
+    },
+    onCancel () {
+      this.$router.push('/playlist/list')
     }
   }
 }

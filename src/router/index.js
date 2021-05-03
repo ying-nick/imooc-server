@@ -41,42 +41,42 @@ export const constantRoutes = [
     redirect: "/playlist/list"
   },
   {
-    path: '/playlist',
+    path: "/playlist",
     component: Layout,
     children: [
       {
-        path: 'list',
+        path: "list",
         // name: 'List',
-        component: () => import('@/views/playlist/list'),
-        meta: { title: '歌单管理', icon: 'table' }
+        component: () => import("@/views/playlist/list"),
+        meta: { title: "歌单管理", icon: "table" }
       },
       {
-        path: 'edit/:id',
-        component: () => import('@/views/playlist/edit'),
-        meta: { title: '编辑歌单', icon: 'table' },
-        hidden:true
+        path: "edit/:id",
+        component: () => import("@/views/playlist/edit"),
+        meta: { title: "编辑歌单", icon: "table" },
+        hidden: true
       }
     ]
   },
   {
-    path: '/swiper',
+    path: "/swiper",
     component: Layout,
     children: [
       {
-        path: 'swiper',
-        component: () => import('@/views/swiper/swiper'),
-        meta: { title: '轮播图管理', icon: 'example' }
+        path: "list",
+        component: () => import("@/views/swiper/list"),
+        meta: { title: "轮播图管理", icon: "example" }
       }
     ]
   },
   {
-    path: '/blog',
+    path: "/blog",
     component: Layout,
     children: [
       {
-        path: 'blog',
-        component: () => import('@/views/blog/blog'),
-        meta: { title: '博客管理', icon: 'tree' }
+        path: "blog",
+        component: () => import("@/views/blog/blog"),
+        meta: { title: "博客管理", icon: "tree" }
       }
     ]
   },
