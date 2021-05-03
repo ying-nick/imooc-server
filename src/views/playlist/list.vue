@@ -11,6 +11,7 @@
       <el-table-column prop="copywriter" label="描述"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
+          <!-- 参数，点击时该行所对应内容 -->
           <el-button size="mini" @click="onEdit(scope.row)">编辑</el-button>
           <el-button size="mini" type="danger" @click="onDel(scope.row)">删除</el-button>
         </template>
@@ -62,7 +63,10 @@ export default {
         }
 
       })
-    }
+    },
+    onEdit(row){
+
+    },
   }
 }
 </script>
