@@ -56,11 +56,11 @@ export default {
         //data位置
         // console.log(res)
         this.playlist = this.playlist.concat(res.data)
-        if (res.data.data.length < this.count) {
+        this.loading = false
+        if (res.data.length < this.count) {
           scroll.end()
         }
-        this.loading = false
-        // console.log(res.data.data)
+
       })
     }
   }
