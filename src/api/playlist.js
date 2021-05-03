@@ -23,3 +23,10 @@ export function update(params) {
     }
   });
 }
+export function del (params) {
+  return request({
+    params,
+    url: `${baseURL}/playlist/del`,
+    method: 'get',
+  })
+}

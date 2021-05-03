@@ -30,14 +30,17 @@
 </template>
 <script>
 //*调用路由获取列表
-import { fetchList } from '@/api/playlist'
+import { fetchList, del } from '@/api/playlist'
 import scroll from '@/utils/scroll'
 export default {
   data () {
     return {
       playlist: [],
       count: 50,
-      loading: false
+      loading: false,
+      //删除时跳出确定框
+      delDialogVisible: false,
+      info: {}
     }
   },
   created () {
@@ -64,9 +67,33 @@ export default {
 
       })
     },
-    onEdit(row){
-this.$router.push(`/playlist/edit/${row._id}`)
+    onEdit (row) {
+      this.$router.push(`/playlist/edit/${row._id}`)
     },
+    onDel (row) {
+      this.delDialogVisible = true
+      this.info.id = row._id
+      // console.log(this.info)
+    },
+    doDel () {
+      del({
+        id: this.info.id
+      }).then(res => {
+        // console.log(res)
+        this.delDialogVisible = false
+        if (res.data.deleted > 0) {
+          //重新获取列表
+          this.playlist = []
+          this.getList()
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+        } else {
+          this.$message.error('删除失败')
+        }
+      })
+    }
   }
 }
 </script>
