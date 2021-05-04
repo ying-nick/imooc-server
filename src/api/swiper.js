@@ -7,3 +7,10 @@ export function fetchList () {
     method:"get"
   })
 }
+export function del(params) {
+  return request({
+      params,
+      url: `${baseURL}/swiper/del`,
+      method: 'get',
+  })
+}
