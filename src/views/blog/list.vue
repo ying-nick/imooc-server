@@ -22,7 +22,68 @@
 </template>
 
 <script>
+import { fetchList, del } from '@/api/blog'
+import scroll from '@/utils/scroll'
 export default {
+  data () {
+    return {
+      blogList: [],
+      count: 50,
+      delDialogVisible: false,
+      loading: false,
+      blog: {}
+    }
+  },
+  created () {
+    this.getlist()
+  },
+  mounted () {
+    scroll.start(this.getlist)
+  },
+  methods: {
+    getlist () {
+      this.loading = true
+      fetchList({
+        start: this.blogList.length,
+        count: this.count
+      }).then(res => {
+        // console.log(res)
+        const data = res.data
+        let _blogList = []
+        for (let i = 0, len = data.length; i < len; i++) {
+          _blogList.push(JSON.parse(data[i]))
+        }
+        this.blogList = this.blogList.concat(_blogList)
+        if (_blogList.length < this.count) {
+          scroll.end()
+        }
+        this.loading = false
 
+        // console.log(this.blogList)
+      })
+    },
+    onDel (row) {
+      this.blog = row
+      this.delDialogVisible = true
+    },
+    doDel () {
+      this.delDialogVisible = false
+      this.loading = true
+      del(this.blog).then((res) => {
+        this.loading = false
+        // console.log(res)
+        if (res.data.delBlogRes.deleted > 0) {
+          this.blogList = []
+          this.getlist()
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+
+        }
+      })
+
+    }
+  }
 }
 </script>
